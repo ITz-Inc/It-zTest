@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript">
+	function sendData() {
+		document.bgColor = '#EE4488';
+		webInterface.sendJson("test");
+	}
+
+	function testJs() {
+		document.bgColor = '#748022';
+	}
+</script>
+
+<body>
+	<h1>Test Server</h1>
+	<p>テストです</p>
+	<!-- <form action="http://192.168.0.102:8080/TestServer/SPMainServlet"> -->
+		<input type="text" name="user_name" id="user_name">
+		<input type="password" name="user_pass" id="user_pass">
+		<!-- <input type="submit" value="送信"> -->
+		<input type="button" value="送信" onclick="sendData()">
+		<input type="button" value="テスト" onclick="testJs()">
+	<!-- </form> -->
+
+</body>
+</html>
