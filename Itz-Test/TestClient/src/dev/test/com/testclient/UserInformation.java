@@ -2,20 +2,26 @@ package dev.test.com.testclient;
 
 public class UserInformation {
 
-	String mName;
-	String mPassword;
+	String id;
+	String name;
+	String password;
 	
-	public String getmName() {
-		return mName;
+	public String getId() {
+		return id;
 	}
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getmPassword() {
-		return mPassword;
+	public String getName() {
+		return name;
 	}
-	public void setmPassword(String mPassword) {
-		this.mPassword = mPassword;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

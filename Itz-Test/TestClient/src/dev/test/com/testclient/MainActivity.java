@@ -11,19 +11,25 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-public class MainActivity extends Activity implements ScreenTransitionEventListner {
+public class MainActivity extends Activity implements ScreenTransitionEventListner, UserInformationWrapper {
 
 	private WebView mWebView;
 	private Handler mHandler;
+	private UserInformation mUserInformation;
 	
 	@SuppressLint({ "SetJavaScriptEnabled", "HandlerLeak" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		WebInterface webInterface = new WebInterface(this);
+		webInterface.setScreenTransitionEventListener(this);
+		webInterface.setUserInformationWrapper(this);
+		
 		mWebView = (WebView)findViewById(R.id.webview);
         mWebView.loadUrl("file:///android_asset/login.html");
-        mWebView.addJavascriptInterface(new WebInterface(this, this), "webInterface");
+        mWebView.addJavascriptInterface(webInterface, "webInterface");
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //画面遷移時に次のページをデフォルトのブラウザで新しく開かないように、このwebViewにloadするようにする
@@ -36,9 +42,12 @@ public class MainActivity extends Activity implements ScreenTransitionEventListn
         mHandler = new Handler() {
         	@Override
         	public void handleMessage(Message message) {
+				Log.d("ITz_TEST", "URL : " + (String)message.obj);
         		mWebView.loadUrl((String)message.obj);
         	}
         };
+        
+        mUserInformation = new UserInformation();
 	}
 
 	@Override
@@ -61,10 +70,46 @@ public class MainActivity extends Activity implements ScreenTransitionEventListn
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mWebView.destroy();
+	}
+	
+	@Override
 	public void transitionTo(String url) {
-		Log.d("ScreenTransition", "test1 transition success! : " + url);
+		Log.d("ITz_TEST", "screen transition to : " + url);
 		Message message = Message.obtain();
 		message.obj = url;
 		mHandler.sendMessage(message);
+	}
+
+	@Override
+	public String getId() {
+		return mUserInformation.getId();
+	}
+
+	@Override
+	public void setId(String id) {
+		mUserInformation.setId(id);
+	}
+	
+	@Override
+	public String getName() {
+		return mUserInformation.getName();
+	}
+
+	@Override
+	public void setName(String name) {
+		mUserInformation.setName(name);
+	}
+
+	@Override
+	public String getPassword() {
+		return mUserInformation.getPassword();
+	}
+
+	@Override
+	public void setPassword(String password) {
+		mUserInformation.setPassword(password);
 	}
 }
