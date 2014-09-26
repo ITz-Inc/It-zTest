@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript">
+	function login() {
+		document.bgColor = '#EE4488';
+		webInterface.sendLoginInformation("itz", "memoryz");
+	}
+
+	function testJs() {
+		document.bgColor = '#748022';
+	}
+</script>
+
+<body>
+	<h1>Test Server</h1>
+	<p>テストです</p>
+	<!-- <form action="http://192.168.0.102:8080/TestServer/SPMainServlet"> -->
+		<input type="text" name="user_id" id="user_id">
+		<input type="password" name="user_pass" id="user_pass">
+		<!-- <input type="submit" value="送信"> -->
+		<input type="button" value="送信" onclick="login()">
+		<input type="button" value="テスト" onclick="testJs()">
+	<!-- </form> -->
+
+</body>
+</html>
