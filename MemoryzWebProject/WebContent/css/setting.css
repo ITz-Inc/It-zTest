@@ -1,0 +1,18 @@
+div#picture {
+	width: 96px;
+	height: 96px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #DB066D;
+	border-radius: 12px;
+}
+
+div.profile_item {
+
+}
+
+input.profile_item_input {
+	width: 54%;
+	margin-top: 22px;
+}
+
